@@ -9,6 +9,7 @@ export class MyUploadAdapter {
         this.loader = loader;
     }
     async upload() {
+        // upload file to server
         console.log("FILE: -------------", await this.loader.file);
         return {
             default: 'https://ckeditor.com/docs/assets/2.1.7/img/book.svg'
@@ -19,11 +20,14 @@ export class MyUploadAdapter {
     }
 }
 
+
+
+
 export default function Ck() {
     const [data, setData] = useState("")
 
-    function DNXCustomUploadAdapterPlugin(editor: ClassicEditor) {
-        editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+    function DNXCustomUploadAdapterPlugin(editor: any) {
+        editor.plugins.get("FileRepository").createUploadAdapter = (loader: any) => {
             return new MyUploadAdapter(loader)
         };
     };

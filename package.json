@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^35.3.2",
+    "@ckeditor/ckeditor5-build-decoupled-document": "^35.3.2",
+    "@ckeditor/ckeditor5-image": "^35.3.2",
     "@ckeditor/ckeditor5-react": "^5.0.3",
     "@ckeditor/ckeditor5-upload": "^35.3.2",
     "@milon27/react-modal": "^1.2.4",
@@ -24,6 +26,8 @@
   },
   "devDependencies": {
     "@types/ckeditor__ckeditor5-build-classic": "^29.0.1",
+    "@types/ckeditor__ckeditor5-build-decoupled-document": "^29.1.1",
+    "@types/ckeditor__ckeditor5-image": "^33.0.0",
     "@types/ckeditor__ckeditor5-upload": "^27.0.7",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.5",
