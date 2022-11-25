@@ -7,6 +7,8 @@ import '@milon27/react-sidebar/dist/react-sidebar.css'
 import 'react-toastify/dist/ReactToastify.css';
 
 import './index.css'
+// import 'react-quill/dist/quill.core.css';
+// import 'react-quill/dist/quill.snow.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -1,6 +1,7 @@
 enum URL {
     HOME = "/",
     CK = "/ck",
+    QUIL = "/quil",
     PROFILE = "/me",
 }
 

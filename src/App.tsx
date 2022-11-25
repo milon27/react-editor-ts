@@ -10,7 +10,7 @@ axios.defaults.withCredentials = true
 
 export default function App() {
   return (
-    <div className='font-poppins text-[#3f4254]'>
+    <div className='font-poppins text-[#3f4254] container mx-auto p-5'>
       <MainContext>
         <AppWrapper>
           <Router />

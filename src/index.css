@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* .ql-iframely div {
+    padding-bottom: 41%;
+    padding-top: 100%;
+} */
+
+.ql-editing {
+    left: 48%;
+    top: 0;
+}
+
+
 /* ck editor support for tailwind */
 
 .ck-content blockquote {

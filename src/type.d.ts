@@ -17,3 +17,12 @@ declare module '@ckeditor/ckeditor5-react' {
     }>
     export { CKEditor };
 }
+
+
+declare module 'quill-image-resize-module' {
+    export { ImageResize }
+}
+
+declare module 'quill-image-drop-module' {
+    export { ImageDrop }
+}
