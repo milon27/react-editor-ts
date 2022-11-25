@@ -2,14 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .ql-iframely div {
-    padding-bottom: 41%;
-    padding-top: 100%;
-} */
+.ql-picker.ql-table:nth-of-type(1) .ql-picker-label::before {
+    content: "" !important;
+}
 
-.ql-editing {
-    left: 48%;
-    top: 0;
+.ql-picker.ql-table:nth-of-type(2) .ql-picker-label::before {
+    content: "" !important;
+}
+
+.ql-picker.ql-table .ql-picker-label svg {
+    display: block !important;
 }
 
 

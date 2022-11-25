@@ -2,10 +2,12 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import BlotFormatter from 'quill-blot-formatter';
 import IframelyBlot from '../IframelyBlot';
+import TableModule from 'quill1-table';
 
 import 'react-quill/dist/quill.snow.css';
 
 Quill.register({ 'formats/iframely': IframelyBlot });
+Quill.register('modules/table', TableModule);
 Quill.register('modules/blotFormatter', BlotFormatter);
 
 interface IVideoInput {
@@ -36,6 +38,11 @@ const MyQuill = () => {
             const _iframe = document.querySelector(".ql-iframe") as HTMLElement | undefined
             if (_iframe)
                 _iframe.innerHTML = `<svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1,.cls-2{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px;}.cls-2{fill-rule:evenodd;}</style></defs><g id="ic-media-disk"><rect class="cls-1" x="8" y="5" width="8" height="14" rx="0.2"/><path class="cls-2" d="M5,8H2.2a.2.2,0,0,0-.2.2v7.6a.2.2,0,0,0,.2.2H5"/><path class="cls-2" d="M19,16h2.8a.2.2,0,0,0,.2-.2V8.2a.2.2,0,0,0-.2-.2H19"/></g></svg>`
+
+            const _table = document.querySelector(".ql-table .ql-picker-label") as HTMLElement | undefined
+            if (_table) {
+                _table.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#fff" fill-rule="nonzero" stroke="#464646" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 13.5h13v9h-13z"/><path d="M18.5 13.5h13v9h-13z"/><path d="M31.5 13.5h13v9h-13z"/><path d="M44.5 13.5h13v9h-13zm-39 9h13v9h-13z"/><path d="M18.5 22.5h13v9h-13z"/><path d="M31.5 22.5h13v9h-13z"/><path d="M44.5 22.5h13v9h-13zm-39 9h13v9h-13z"/><path d="M18.5 31.5h13v9h-13z"/><path d="M31.5 31.5h13v9h-13z"/><path d="M44.5 31.5h13v9h-13zm-39 9h13v9h-13z"/><path d="M18.5 40.5h13v9h-13z"/><path d="M31.5 40.5h13v9h-13z"/><path d="M44.5 40.5h13v9h-13z"/></svg>`
+            }
         }
     }, [])
 
@@ -48,6 +55,29 @@ const MyQuill = () => {
         [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
         ['image', 'video', 'iframe'],
         [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+        [
+            {
+                'table': TableModule.tableOptions()
+            },
+            {
+                'table': [
+                    'insert',
+                    'append-row-above',
+                    'append-row-below',
+                    'append-col-before',
+                    'append-col-after',
+                    'remove-col',
+                    'remove-row',
+                    'remove-table',
+                    'split-cell',
+                    'merge-selection',
+                    'remove-cell',
+                    'remove-selection',
+                    'undo',
+                    'redo'
+                ]
+            }
+        ]
     ];
 
     const imageHandler = async () => {
@@ -98,7 +128,10 @@ const MyQuill = () => {
             },
             blotFormatter: {
 
-            }
+            }, table: {
+                // table module options
+                cellSelectionOnClick: true // true: cell selection on click, false: cell selection with CTRL key
+            },
         }),
         [],
     );
