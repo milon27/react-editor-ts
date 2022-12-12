@@ -3,9 +3,13 @@ import ReactQuill, { Quill } from 'react-quill';
 import BlotFormatter from 'quill-blot-formatter';
 import IframelyBlot from '../IframelyBlot';
 import TableModule from 'quill1-table';
+import ImageStyleBlot from '../ImageStyleBlot';
+import IframeStyleBlot from '../IframeStyleBlot';
 
 import 'react-quill/dist/quill.snow.css';
 
+Quill.register(ImageStyleBlot, true);
+Quill.register(IframeStyleBlot, true);
 Quill.register({ 'formats/iframely': IframelyBlot });
 Quill.register('modules/table', TableModule);
 Quill.register('modules/blotFormatter', BlotFormatter);
@@ -26,7 +30,9 @@ const VideoInput = ({ onInsertClick }: IVideoInput) => {
 
 
 const MyQuill = () => {
-    const [value, setValue] = useState(``);
+    const [value, setValue] = useState(`
+   <p>how are you</p><iframe class="ql-video" allowfullscreen="true" src="https://www.youtube.com/embed/8zKuNo4ay8E?showinfo=0" style="cursor: nwse-resize; display: block; margin: auto;" width="260" height="130" frameborder="0"></iframe><p><br></p><p><img src="https://avatars.githubusercontent.com/u/44096479?v=4" style="display: inline; margin: 0px 0px 1em 1em; float: right;" width="186" height="186"></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p>
+    `);
     const reactQuillRef: any = useRef(null);
 
     const [showPrev, setShowPrev] = useState(false)
@@ -85,6 +91,8 @@ const MyQuill = () => {
         const cursorPosition = quill.getSelection().index;
         // alert(1);
         // max-width: 100%;
+        // show gallery
+        // url
         quill.insertEmbed(cursorPosition, 'image', 'https://avatars.githubusercontent.com/u/44096479?v=4');
         quill.setSelection(cursorPosition + 1);
         // hide();
@@ -163,6 +171,11 @@ const MyQuill = () => {
                     <div className='ql-editor' dangerouslySetInnerHTML={{ __html: value }}></div>
                 </div>
             }
+            <br />
+            {
+                value
+            }
+
 
         </div>
     );
