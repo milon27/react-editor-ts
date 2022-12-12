@@ -1,5 +1,5 @@
 import { Quill } from "react-quill";
-
+// https://github.com/kensnyder/quill-image-resize-module/issues/43
 // BEGIN allow image alignment styles
 export const FormatAttributesList = [
     'alt',
