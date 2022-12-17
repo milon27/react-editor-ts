@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import BlotFormatter from 'quill-blot-formatter';
 import IframelyBlot from '../IframelyBlot';
@@ -31,7 +31,7 @@ const VideoInput = ({ onInsertClick }: IVideoInput) => {
 
 const MyQuill = () => {
     const [value, setValue] = useState(`
-   <p>how are you</p><iframe class="ql-video" allowfullscreen="true" src="https://www.youtube.com/embed/8zKuNo4ay8E?showinfo=0" style="cursor: nwse-resize; display: block; margin: auto;" width="260" height="130" frameborder="0"></iframe><p><br></p><p><img src="https://avatars.githubusercontent.com/u/44096479?v=4" style="display: inline; margin: 0px 0px 1em 1em; float: right;" width="186" height="186"></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p>
+    <div class="ql-iframely"><div style="margin: auto;max-width: 660px;"><div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 46%; padding-top: 100%;"><iframe src="//cdn.iframe.ly/api/iframe?app=1&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FClQv_lSvEIV%2F&amp;key=ccc4853ce40fbc9f0859aaff1e7971b6" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;" allowfullscreen=""></iframe></div></div></div><h2 class="ql-align-center"><br></h2>
     `);
     const reactQuillRef: any = useRef(null);
 
@@ -39,7 +39,7 @@ const MyQuill = () => {
     const [showVideo, setShowVideo] = useState(false)
     const [currentPos, setCurrentPos] = useState(0)
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (document) {
             const _iframe = document.querySelector(".ql-iframe") as HTMLElement | undefined
             if (_iframe)
@@ -50,7 +50,7 @@ const MyQuill = () => {
                 _table.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#fff" fill-rule="nonzero" stroke="#464646" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 13.5h13v9h-13z"/><path d="M18.5 13.5h13v9h-13z"/><path d="M31.5 13.5h13v9h-13z"/><path d="M44.5 13.5h13v9h-13zm-39 9h13v9h-13z"/><path d="M18.5 22.5h13v9h-13z"/><path d="M31.5 22.5h13v9h-13z"/><path d="M44.5 22.5h13v9h-13zm-39 9h13v9h-13z"/><path d="M18.5 31.5h13v9h-13z"/><path d="M31.5 31.5h13v9h-13z"/><path d="M44.5 31.5h13v9h-13zm-39 9h13v9h-13z"/><path d="M18.5 40.5h13v9h-13z"/><path d="M31.5 40.5h13v9h-13z"/><path d="M44.5 40.5h13v9h-13z"/></svg>`
             }
         }
-    }, [])
+    }, [showPrev])
 
     let toolbarOptions = [
         [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
@@ -171,12 +171,8 @@ const MyQuill = () => {
                     <div className='ql-editor' dangerouslySetInnerHTML={{ __html: value }}></div>
                 </div>
             }
-            <br />
-            {
-                value
-            }
 
-
+            {value}
         </div>
     );
 };

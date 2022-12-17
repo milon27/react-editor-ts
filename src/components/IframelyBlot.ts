@@ -15,6 +15,9 @@ class IframelyBlot extends BaseBlock {
         //node.setAttribute('data-url', data.url);
         return node;
     }
+    static value(domNode: any) {
+        return domNode.innerHTML
+    }
 
 }
 
