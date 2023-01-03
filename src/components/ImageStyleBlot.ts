@@ -11,7 +11,17 @@ export const FormatAttributesList = [
 const BaseImageFormat = Quill.import('formats/image');
 
 class ImageStyleBlot extends BaseImageFormat {
+    static create(value: string) {
+        const node = super.create(value);
+        if (typeof value == "string") {
+            node.setAttribute('src', this.sanitize(value));
+            // node.setAttribute('alt', "hello world");
+        }
+        return node;
+    }
     static formats(domNode: any) {
+        // domNode.parentNode.innerText = "hello"
+
         return FormatAttributesList.reduce(function (formats: any, attribute) {
             if (domNode.hasAttribute(attribute)) {
                 formats[attribute] = domNode.getAttribute(attribute);

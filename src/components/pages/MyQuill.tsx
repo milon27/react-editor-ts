@@ -31,7 +31,7 @@ const VideoInput = ({ onInsertClick }: IVideoInput) => {
 
 const MyQuill = () => {
     const [value, setValue] = useState(`
-    <div class="ql-iframely"><div style="margin: auto;max-width: 660px;"><div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 46%; padding-top: 100%;"><iframe src="//cdn.iframe.ly/api/iframe?app=1&amp;url=https%3A%2F%2Fwww.instagram.com%2Fp%2FClQv_lSvEIV%2F&amp;key=ccc4853ce40fbc9f0859aaff1e7971b6" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;" allowfullscreen=""></iframe></div></div></div><h2 class="ql-align-center"><br></h2>
+
     `);
     const reactQuillRef: any = useRef(null);
 
@@ -93,9 +93,32 @@ const MyQuill = () => {
         // max-width: 100%;
         // show gallery
         // url
-        quill.insertEmbed(cursorPosition, 'image', 'https://avatars.githubusercontent.com/u/44096479?v=4');
-        quill.setSelection(cursorPosition + 1);
+        // quill.insertEmbed(cursorPosition, 'image', 'https://avatars.githubusercontent.com/u/44096479');
+        // quill.formatLine(0, 5, 'alt', 'new value');
+
+        const caption = 'this is caption'
+        // quill.insertText(cursorPosition + 1, caption)
+        // quill.formatText((cursorPosition + caption.length + 1) - cursorPosition, cursorPosition + caption.length + 1, 'align', 'center');
+        // quill.setSelection(cursorPosition + caption.length + 1);
         // hide();
+
+        let delta = {
+            ops: [
+                {
+                    attributes: {
+                        alt: "my alt"
+                    },
+                    insert: {
+                        image: 'https://avatars.githubusercontent.com/u/44096479'
+                    }
+                },
+                { insert: caption },
+            ]
+        };
+        let existingDelta = quill.getContents();
+        let combinedDelta = existingDelta.concat(delta);
+        quill.setContents(combinedDelta);
+        quill.setSelection(cursorPosition + caption.length + 2);
     };
 
     const iframeHandler = async () => {
