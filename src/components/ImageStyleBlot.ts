@@ -15,7 +15,6 @@ class ImageStyleBlot extends BaseImageFormat {
         const node = super.create(value);
         if (typeof value == "string") {
             node.setAttribute('src', this.sanitize(value));
-            // node.setAttribute('alt', "hello world");
         }
         return node;
     }

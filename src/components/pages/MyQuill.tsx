@@ -8,6 +8,9 @@ import IframeStyleBlot from '../IframeStyleBlot';
 
 import 'react-quill/dist/quill.snow.css';
 
+// var Block = Quill.import('blots/block');
+// Block.tagName = 'div';
+// Quill.register(TextStyleBlot, true);
 Quill.register(ImageStyleBlot, true);
 Quill.register(IframeStyleBlot, true);
 Quill.register({ 'formats/iframely': IframelyBlot });
@@ -30,9 +33,7 @@ const VideoInput = ({ onInsertClick }: IVideoInput) => {
 
 
 const MyQuill = () => {
-    const [value, setValue] = useState(`
-
-    `);
+    const [value, setValue] = useState(``);
     const reactQuillRef: any = useRef(null);
 
     const [showPrev, setShowPrev] = useState(false)
@@ -106,15 +107,18 @@ const MyQuill = () => {
             ops: [
                 {
                     attributes: {
-                        alt: "my alt"
+                        alt: "my alt",
+                        style: "display: block; margin: auto;",
                     },
                     insert: {
                         image: 'https://avatars.githubusercontent.com/u/44096479'
                     }
                 },
-                { insert: caption },
+                { insert: caption, attributes: { italic: true } },
+                { "attributes": { "align": "center", "block": { "class": "ql-align-center" } }, insert: "\n" }
             ]
         };
+
         let existingDelta = quill.getContents();
         let combinedDelta = existingDelta.concat(delta);
         quill.setContents(combinedDelta);

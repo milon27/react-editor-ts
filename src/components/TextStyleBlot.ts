@@ -1,26 +1,21 @@
 import { Quill } from "react-quill";
-
+import IframelyBlot from "./IframelyBlot";
+// https://github.com/kensnyder/quill-image-resize-module/issues/43
 // BEGIN allow image alignment styles
 export const FormatAttributesList = [
     'alt',
     'height',
     'width',
-    'style'
+    'style',
+    'class'
 ];
 
-const BaseVideoFormat = Quill.import('formats/video');
-
-class IframeStyleBlot extends BaseVideoFormat {
-    static create(value: string) {
-        const node = super.create(value);
-        if (typeof value == "string") {
-            node.setAttribute('style', "display: block; margin: auto;");
-            // node.setAttribute('width', "500;");
-        }
-        return node;
-    }
-
+var BaseTextFormat = Quill.import('blots/block');
+// not used any where
+class TextStyleBlot extends BaseTextFormat {
     static formats(domNode: any) {
+        // domNode.parentNode.innerText = "hello"
+
         return FormatAttributesList.reduce(function (formats: any, attribute) {
             if (domNode.hasAttribute(attribute)) {
                 formats[attribute] = domNode.getAttribute(attribute);
@@ -40,7 +35,8 @@ class IframeStyleBlot extends BaseVideoFormat {
         }
     }
 }
-
+TextStyleBlot.tagName = 'p';
+// TextStyleBlot.className = 'ql-align-center';
 // Quill.register(ImageFormat, true);
 // END allow image alignment styles
-export default IframeStyleBlot
+export default TextStyleBlot
